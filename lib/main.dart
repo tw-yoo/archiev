@@ -1,14 +1,18 @@
+import 'package:archiev/providers/model_option.dart';
 import 'package:archiev/providers/selector_option.dart';
-import 'package:archiev/selector/model_selector.dart';
+import 'package:archiev/selector/option_selector.dart';
 import 'package:archiev/visualizer/visualizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'api/api.dart';
 
 void main() {
   runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => SelectorOption()),
+          ChangeNotifierProvider(create: (_) => ModelOption())
         ],
         child: const MyApp(),
       )
@@ -21,6 +25,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    getModelList(context);
+
     return MaterialApp(
       title: 'AI ArchiEV',
       theme: ThemeData(primarySwatch: Colors.green),
@@ -55,7 +62,7 @@ class MainPageState extends State<MainPage> {
       ),
       body: Row(
         children: const [
-          Flexible(flex: 2, fit: FlexFit.tight, child: ModelSelector()),
+          Flexible(flex: 2, fit: FlexFit.tight, child: OptionSelector()),
           Flexible(flex: 7, fit: FlexFit.tight, child: Visualizer()),
         ],
       ),
