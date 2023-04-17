@@ -90,15 +90,9 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
             tooltipBehavior: _tooltip,
             selectionGesture: ActivationMode.doubleTap,
             onSelectionChanged: (e) {
-
-              // String selectedArchitecture = context.read<SelectedOptions>().selectedModelList[e.pointIndex];
-              //
-              // context.read<EmissionManager>()
-              //     .updateSelectedArchitecture(
-              //     selectedArchitecture
-              // );
-              // context.read<EmissionManager>()
-              //     .updateShowSubChart(true);
+              String selectedModel = context.read<SelectorOption>().selectedModelOptionList[e.pointIndex];
+              context.read<SelectorOption>().setSelectedDetailModel(selectedModel);
+              context.read<SelectorOption>().setShowDetailGraph(true);
             },
             series: <ChartSeries<ChartData, String>>[
               ColumnSeries<ChartData, String>(

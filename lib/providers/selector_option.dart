@@ -7,6 +7,7 @@ class SelectorOption with ChangeNotifier {
   void notify() { notifyListeners(); }
 
   // ModelSelector options
+  // sorting 옵션 추가되면 여기 수정해야 함.
   List<String> selectedModelOptionList = [];
   void addModelOption(String option) {
     selectedModelOptionList.add(option);
@@ -57,6 +58,17 @@ class SelectorOption with ChangeNotifier {
 
   // show detail graph
   bool showDetailGraph = false;
+  void setShowDetailGraph(bool b) {
+    showDetailGraph = b;
+    notifyListeners();
+  }
+
+  // selected detail graph option
+  String selectedDetailModel = "";
+  void setSelectedDetailModel(String m) {
+    selectedDetailModel = m;
+    notifyListeners();
+  }
 
   // DetailEmissionList Options
   List selectedDetailModelList = [];
