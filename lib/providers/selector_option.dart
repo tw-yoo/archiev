@@ -7,7 +7,7 @@ class SelectorOption with ChangeNotifier {
   void notify() { notifyListeners(); }
 
   // ModelSelector options
-  List selectedModelOptionList = [];
+  List<String> selectedModelOptionList = [];
   void addModelOption(String option) {
     selectedModelOptionList.add(option);
     notifyListeners();
@@ -21,6 +21,20 @@ class SelectorOption with ChangeNotifier {
   Image? imageData = null;
   void setImage(Image img) {
     imageData = img;
+    notifyListeners();
+  }
+
+  Uint8List? imageByte;
+  void setImageByte(Uint8List b) {
+    imageByte = b;
+    notifyListeners();
+  }
+
+  // api에서 가져온 결과 저장하는 리스트.
+  // 탄소배출량 보여줄 때 여기셔 가져다 씀.
+  List<Map> apiResultList = [];
+  void addApiResultList(Map d) {
+    apiResultList.add(d);
     notifyListeners();
   }
 
