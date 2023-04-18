@@ -1,3 +1,4 @@
+import 'package:archiev/api/model/label_and_prob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
@@ -42,8 +43,8 @@ class _InferenceVisualizerState extends State<InferenceVisualizer> {
               (element) => element.model_name == selectedDetailModel
       ).first;
 
-      Map inferenceResult = selectedDetailResult.inference_result;
-      List<dynamic> l = inferenceResult.keys.toList();
+      List<LabelAndProb> inferenceResult = selectedDetailResult.inference_result;
+      List<String> labelList = inferenceResult.map((e) => e.label).toList();
 
       return
         Container(
@@ -55,8 +56,9 @@ class _InferenceVisualizerState extends State<InferenceVisualizer> {
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: Text("Results", style: TextStyle(fontSize: 20,),textAlign: TextAlign.left,),
               ),
-              ...l
-                  .map((e) {
+              ...labelList
+                  .map((label) {
+                    LabelAndProb labelAndProb = inferenceResult.where((element) => element.label == label).first;
                 return Container(
                   alignment: Alignment.centerLeft,
                   height: 50,
@@ -65,18 +67,18 @@ class _InferenceVisualizerState extends State<InferenceVisualizer> {
                     textDirection: TextDirection.ltr,
                     children: [
                       Text(
-                        "$e",
+                        "$label",
                         textAlign: TextAlign.left,
                       ),
                       Row(
                         children: [
                           LinearPercentIndicator(
-                            percent: inferenceResult[e],
+                            percent: labelAndProb.prob,
                             backgroundColor: Colors.grey,
                             progressColor: Colors.orange,
                             width: 200,
                           ),
-                          Text(" ${inferenceResult[e]}")
+                          Text(labelAndProb.prob.toStringAsFixed(5))
                         ],
                       )
                     ],

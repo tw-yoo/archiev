@@ -65,6 +65,7 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
       if (arrangedDataList.isNotEmpty) {
         maxY = arrangedDataList.map((e) => e.y).reduce(max) * 1.1;
       }
+      print("maxY: $maxY");
 
         return SfCartesianChart(
             title: ChartTitle(

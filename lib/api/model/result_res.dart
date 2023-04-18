@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:archiev/api/model/label_and_prob.dart';
+
 class ResultRes {
   String model_name = "";
 
@@ -11,7 +16,7 @@ class ResultRes {
   double step3_time = 0.0;
   double step4_time = 0.0;
 
-  Map<String, double> inference_result = {};
+  List<LabelAndProb> inference_result = [];
 
   ResultRes.fromJson(Map<String, dynamic> json) {
     model_name = json['model_name'];
@@ -27,8 +32,16 @@ class ResultRes {
     step4_time = json['step4_time'];
 
 
+    List<LabelAndProb> _tempList = [];
+    (json['inference_result'] as List<dynamic>)
+        .forEach((element) {
+        LabelAndProb labelAndProb = LabelAndProb.fromjson(element);
+        _tempList.add(labelAndProb);
+    });
 
-    inference_result = Map.from(json['inference_result']);
+    _tempList.sort((a, b) => a.prob.compareTo(b.prob));
+    inference_result = _tempList.reversed.toList().sublist(0, min(_tempList.length, 30));
+
+
   }
-
 }

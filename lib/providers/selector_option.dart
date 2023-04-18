@@ -118,6 +118,7 @@ class SelectorOption with ChangeNotifier {
   // selected detail graph option
   String selectedDetailModel = "";
   void setSelectedDetailModel(String m) {
+    print("selected model: $m");
     selectedDetailModel = m;
     notifyListeners();
   }

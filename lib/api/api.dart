@@ -63,7 +63,7 @@ void updateResultResList(BuildContext context) {
           );
         } else {
           // provider check하고  없으면 추가.
-          Uri url = Uri.parse("$api_path/test/inference/$model");
+          Uri url = Uri.parse("$api_path/inference/$model");
           http.post(url, body: imageByte).then((value) {
             dynamic decodedValue = jsonDecode(value.body);
             ResultRes res = ResultRes.fromJson(decodedValue);
