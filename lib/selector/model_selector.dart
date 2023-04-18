@@ -147,7 +147,7 @@ class _SelectCheckBoxItemState extends State<SelectCheckBoxItem> {
           isChecked = value!;
         });
 
-        context.read<SelectorOption>().getGraphUpdateAvailable();
+        // context.read<SelectorOption>().getGraphUpdateAvailable();
       },
     );
   }

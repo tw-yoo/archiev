@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'api/api.dart';
+import 'api/inference_result.dart';
 
 void main() {
   runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => SelectorOption()),
-          ChangeNotifierProvider(create: (_) => ModelOption())
+          ChangeNotifierProvider(create: (_) => ModelOption()),
+          ChangeNotifierProvider(create: (_) => InferenceResultProvider()),
         ],
         child: const MyApp(),
       )

@@ -15,7 +15,6 @@ class _TopVisualizerState extends State<TopVisualizer> {
     return Row(
       children: const [
         Flexible(flex: 7, fit: FlexFit.tight, child: EmissionVisualizer()),
-        Flexible(flex: 7, fit: FlexFit.tight, child: InferenceVisualizer()),
       ],
     );
   }

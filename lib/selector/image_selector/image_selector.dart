@@ -44,7 +44,7 @@ void uploadImage(BuildContext context) async {
                   .then((byte) {
                     Image img = Image.memory(byte);
                     context.read<SelectorOption>().setImage(img);
-                    context.read<SelectorOption>().getGraphUpdateAvailable();
+                    // context.read<SelectorOption>().getGraphUpdateAvailable();
                     context.read<SelectorOption>().setImageByte(byte);
                   }
                   );

@@ -30,43 +30,42 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
   @override
   Widget build(BuildContext context) {
 
-    bool visualizeGraph = context.watch<SelectorOption>().getGraphUpdateAvailable();
+    // bool visualizeGraph = ;
+    List<ResultRes> resultResList = context.watch<SelectorOption>().apiResultList;
 
-    if (!visualizeGraph) {
+    if (!context.watch<SelectorOption>().showGraph) {
       return Container(
         child: Text(""),
       );
     } else {
 
-      // 현재 선택된 모델리스트
-      List<String> selectedModelList = context.watch<SelectorOption>().selectedModelOptionList;
-      // api로 데이터 가져오기
-      getResultResList(context, selectedModelList);
-
       // 보여줄 데이터 업데이트하기
       List<ChartData> data = [];
-      selectedModelList
-          .forEach((element) {
-            List<Map> resultResList = context.watch<SelectorOption>().apiResultList;
-            Iterable<String> resultModelNameList = resultResList.map((e) => e['model_name']! as String);
+      resultResList
+          .forEach((resultRes) {
+            Iterable<String> resultModelNameList = resultResList.map((e) => e.model_name);
 
-            if (resultModelNameList.contains(element)) {
+            if (resultModelNameList.contains(resultRes.model_name)) {
               // resultModelNameList가 선택한 model 이름을 가지고 있으면 그래프로 보여줌.
 
-              Map d = resultResList.where((it) => it['model_name']! == element).first;
+              ResultRes d = resultResList.where((it) => it.model_name == resultRes.model_name).first;
 
-              double emissionSum = d['step1_emission'] +
-                  d['step2_emission'] + d['step1_emission'] +
-                  d['step4_emission'];
+              double emissionSum = d.step1_emission +
+                  d.step2_emission + d.step1_emission +
+                  d.step4_emission;
 
-              data.add(ChartData(element, emissionSum));
+              data.add(ChartData(resultRes.model_name, emissionSum));
             }
           });
 
+      List<ChartData> arrangedDataList = context.read<SelectorOption>()
+          .arrangeChartDataListByOptions(data);
+
       double maxY = 1.0;
-      if (data.isNotEmpty) {
-        maxY = data.map((e) => e.y).reduce(max) * 1.1;
+      if (arrangedDataList.isNotEmpty) {
+        maxY = arrangedDataList.map((e) => e.y).reduce(max) * 1.1;
       }
+
         return SfCartesianChart(
             title: ChartTitle(
                 text: 'Carbon emission of selected model(s)',
@@ -96,7 +95,7 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
             },
             series: <ChartSeries<ChartData, String>>[
               ColumnSeries<ChartData, String>(
-                  dataSource: data,
+                  dataSource: arrangedDataList,
                   xValueMapper: (ChartData data, _) => data.x,
                   yValueMapper: (ChartData data, _) => data.y,
                   name: 'Kg co2eq for training one hour and inferring 1,000 times',

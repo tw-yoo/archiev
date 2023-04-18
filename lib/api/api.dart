@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:archiev/api/inference_result.dart';
 import 'package:archiev/providers/selector_option.dart';
 import 'package:archiev/selector/option_selector.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,22 +36,41 @@ void getModelList(BuildContext context) {
   );
 }
 
-void getResultResList(BuildContext context, List<String> modelList) {
+void updateResultResList(BuildContext context) {
 
-  Uint8List imageByte = context.watch<SelectorOption>().imageByte!;
+  Uint8List imageByte = context.read<SelectorOption>().imageByte!;
+
+  List<String> modelList = context.read<SelectorOption>().selectedModelOptionList;
+
+  Map<String, Map<String, ResultRes>> resultMap = context.read<InferenceResultProvider>().resultMap;
+
+  context.read<SelectorOption>().emptyApiResultList();
 
   modelList
-      .forEach((element) {
-        if (!context.watch<SelectorOption>().apiResultList
-            .map((e) => e['model_name']).contains(element)) {
+      .forEach((model) {
 
-          Uri url = Uri.parse("$api_path/test/inference/$element");
+        bool resultMapContainsModel = resultMap.containsKey(model);
+        bool resultMapContainsModelAndImage = false;
+        if (resultMapContainsModel) {
+          if (resultMap[model]!.containsKey(imageByte.toString())) {
+            resultMapContainsModelAndImage = true;
+          }
+        }
+
+        if (resultMapContainsModelAndImage) {
+          context.read<SelectorOption>().addApiResultList(
+              resultMap[model]![imageByte.toString()]!
+          );
+        } else {
+          // provider check하고  없으면 추가.
+          Uri url = Uri.parse("$api_path/test/inference/$model");
           http.post(url, body: imageByte).then((value) {
-            context.read<SelectorOption>().addApiResultList(jsonDecode(value.body));
+            dynamic decodedValue = jsonDecode(value.body);
+            ResultRes res = ResultRes.fromJson(decodedValue);
+
+            context.read<InferenceResultProvider>().addResultResToResultMap(model, imageByte.toString(), res);
+            context.read<SelectorOption>().addApiResultList(res);
           });
-
-        }});
-
-
-
+        }
+      });
 }
