@@ -15,8 +15,8 @@ class _VisualizerState extends State<Visualizer> {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        Flexible(flex: 7, fit: FlexFit.tight, child: TopVisualizer()),
-        Flexible(flex: 7, fit: FlexFit.tight, child: BottomVisualizer()),
+        Flexible(flex: 6, fit: FlexFit.tight, child: TopVisualizer()),
+        Flexible(flex: 6, fit: FlexFit.tight, child: BottomVisualizer()),
       ],
     );
   }

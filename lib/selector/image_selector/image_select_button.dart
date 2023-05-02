@@ -19,7 +19,7 @@ class ImageSelectButtonState extends State<ImageSelectButton> {
           uploadImage(context);
         },
         // style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)),
-        child: const Text("Click to upload image", style: TextStyle(color: Colors.black),),
+        child: const Text("Click to Upload Image", style: TextStyle(color: Colors.black),),
       ),
     );
   }

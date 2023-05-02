@@ -18,7 +18,7 @@ class ImageBoxState extends State<ImageBox> {
     Image? img = context.watch<SelectorOption>().imageData;
 
     if (img == null) {
-      return Text("image not selected");
+      return Text("Image Not Selected");
     } else {
       return Container(
         child: img,

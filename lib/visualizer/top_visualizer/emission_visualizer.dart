@@ -1,3 +1,4 @@
+// import 'dart:ffi';
 import 'dart:math';
 
 import 'package:archiev/api/model/result_res.dart';
@@ -69,23 +70,29 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
 
         return SfCartesianChart(
             title: ChartTitle(
-                text: 'Carbon emission of selected model(s)',
+                text: 'Carbon Emission of Selected Model(s)',
                 textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
             ),
             primaryXAxis: CategoryAxis(
                 title: AxisTitle(
                     text: "Model",
                     textStyle: TextStyle(fontWeight: FontWeight.bold)
-                )
+                ),
+              labelStyle: const TextStyle(
+                color: Colors.black
+              )
             ),
             primaryYAxis: NumericAxis(
                 title: AxisTitle(
-                    text: "gCO2eq",
+                    text: "Carbon Emissions (CO2 grams)",
                     textStyle: TextStyle(fontWeight: FontWeight.bold)
                 ),
                 minimum: 0,
                 maximum: maxY,
-                interval: maxY * 0.1
+                interval: maxY * 0.1,
+              labelStyle: const TextStyle(
+                color: Colors.black
+              )
             ),
             tooltipBehavior: _tooltip,
             selectionGesture: ActivationMode.doubleTap,
@@ -93,17 +100,30 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
               String selectedModel = context.read<SelectorOption>().selectedModelOptionList[e.pointIndex];
               context.read<SelectorOption>().setSelectedDetailModel(selectedModel);
               context.read<SelectorOption>().setShowDetailGraph(true);
+              // print("clicked selected model option: $selectedDetailModelOption");
             },
             series: <ChartSeries<ChartData, String>>[
               ColumnSeries<ChartData, String>(
                   dataSource: arrangedDataList,
                   xValueMapper: (ChartData data, _) => data.x,
                   yValueMapper: (ChartData data, _) => data.y,
-                  name: 'Kg co2eq for training one hour and inferring 1,000 times',
-                  color: Color.fromRGBO(8, 142, 255, 1),
+                  pointColorMapper: (ChartData data, _) => getChartColor(context, data),
+                  // name: 'Kg co2eq for training one hour and inferring 1,000 times',
+                  name: '',
+                  color: Colors.green,
                   animationDuration: 500
               ),
-            ]);
+            ]
+    );
     }
+  }
+}
+
+MaterialColor getChartColor(BuildContext context, ChartData chartData) {
+
+  if (context.watch<SelectorOption>().selectedDetailModel == chartData.x) {
+    return Colors.indigo;
+  } else {
+    return Colors.green;
   }
 }

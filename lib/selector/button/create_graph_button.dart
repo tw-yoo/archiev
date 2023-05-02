@@ -23,7 +23,7 @@ class CreateGraphButtonState extends State<CreateGraphButton> {
           context.read<SelectorOption>().setShowGraph(context, true);
           updateResultResList(context);
         },
-        child: Text("create graph", style: TextStyle(color: Colors.white),),
+        child: Text("Create Chart", style: TextStyle(color: Colors.white),),
         style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)),
       )
     );

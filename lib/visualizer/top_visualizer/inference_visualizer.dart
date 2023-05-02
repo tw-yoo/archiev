@@ -54,7 +54,7 @@ class _InferenceVisualizerState extends State<InferenceVisualizer> {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                child: Text("Results", style: TextStyle(fontSize: 20,),textAlign: TextAlign.left,),
+                child: Text("$selectedDetailModel Inference Results", style: TextStyle(fontSize: 20,),textAlign: TextAlign.left,),
               ),
               ...labelList
                   .map((label) {
@@ -78,7 +78,7 @@ class _InferenceVisualizerState extends State<InferenceVisualizer> {
                             progressColor: Colors.orange,
                             width: 200,
                           ),
-                          Text(labelAndProb.prob.toStringAsFixed(5))
+                          Text(labelAndProb.prob.toStringAsFixed(3))
                         ],
                       )
                     ],
