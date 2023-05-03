@@ -101,7 +101,7 @@ class _DetailEmissionVisualizerState extends State<DetailEmissionVisualizer> {
                   dataSource: data,
                   xValueMapper: (ChartData data, _) => data.x,
                   yValueMapper: (ChartData data, _) => data.y,
-                  color: Color.fromRGBO(8, 142, 255, 1),
+                  color: Colors.green,
                   animationDuration: 500,
                 dataLabelMapper: (ChartData data, _) => "${getStep(data.x)} \n ${data.y.toStringAsFixed(2)}%",
                 dataLabelSettings: const DataLabelSettings(

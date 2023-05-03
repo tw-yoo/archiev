@@ -122,7 +122,7 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
 MaterialColor getChartColor(BuildContext context, ChartData chartData) {
 
   if (context.watch<SelectorOption>().selectedDetailModel == chartData.x) {
-    return Colors.indigo;
+    return Colors.deepOrange;
   } else {
     return Colors.green;
   }
