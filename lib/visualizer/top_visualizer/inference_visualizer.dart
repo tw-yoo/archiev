@@ -53,8 +53,8 @@ class _InferenceVisualizerState extends State<InferenceVisualizer> {
           child: Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                child: Text("$selectedDetailModel Inference Results", style: TextStyle(fontSize: 20,),textAlign: TextAlign.left,),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: Text(selectedDetailModel, style: const TextStyle(fontSize: 20,),textAlign: TextAlign.left,),
               ),
               ...labelList
                   .map((label) {

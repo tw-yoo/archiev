@@ -1,0 +1,40 @@
+# Flutter build artifacts
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# Version control directories
+.git/
+.gitignore
+.svn/
+.hg/
+
+# IDE / Editor directories
+.idea/
+.vscode/
+*.swp
+*~
+
+# Dependency caches
+pubspec.lock
+Pods/
+Podfile.lock
+Podfile
+node_modules/
+
+# Operating System generated files
+.DS_Store
+Thumbs.db
+
+# Flutter specific files
+flutter_export_environment.sh
+
+# Other commonly ignored files
+README.md
+LICENSE
+docker-compose.yml
+*.log
+*.tmp
+*.temp

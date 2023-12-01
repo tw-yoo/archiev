@@ -50,10 +50,10 @@ class _DetailEmissionVisualizerState extends State<DetailEmissionVisualizer> {
         double emissionSum = resultRes.step1_emission + resultRes.step2_emission
             + resultRes.step3_emission + resultRes.step4_emission;
 
-        data.add(ChartData("step1", 100 * resultRes.step1_emission  / emissionSum));
-        data.add(ChartData("step2", 100 * resultRes.step2_emission / emissionSum));
-        data.add(ChartData("step3", 100 * resultRes.step3_emission / emissionSum));
-        data.add(ChartData("step4", 100 * resultRes.step4_emission / emissionSum));
+        data.add(ChartData("Convert Byte to Image Object", 100 * resultRes.step1_emission  / emissionSum));
+        data.add(ChartData("Load Model", 100 * resultRes.step2_emission / emissionSum));
+        data.add(ChartData("Resize Image", 100 * resultRes.step3_emission / emissionSum));
+        data.add(ChartData("Inference", 100 * resultRes.step4_emission / emissionSum));
 
         double maxY = 100;
         // if (data.isNotEmpty) {
@@ -103,11 +103,11 @@ class _DetailEmissionVisualizerState extends State<DetailEmissionVisualizer> {
                   yValueMapper: (ChartData data, _) => data.y,
                   color: Colors.green,
                   animationDuration: 500,
-                dataLabelMapper: (ChartData data, _) => "${getStep(data.x)} \n ${data.y.toStringAsFixed(2)}%",
+                dataLabelMapper: (ChartData data, _) => "${getStepEmission(data.x, resultRes)} \n ${data.y.toStringAsFixed(3)}",
                 dataLabelSettings: const DataLabelSettings(
                   isVisible: true,
                   labelAlignment: ChartDataLabelAlignment.outer,
-                  color: Colors.black,
+                  // color: Colors.black,
                 ),
               ),
             ]);
@@ -121,6 +121,20 @@ class _DetailEmissionVisualizerState extends State<DetailEmissionVisualizer> {
     // );
   }
 
+}
+
+String getStepEmission(String step, ResultRes resultRes) {
+  if (step == "Convert Byte to Image Object") {
+    return "${resultRes.step1_emission.toStringAsFixed(3)} grams";
+  } else if (step == "Load Model") {
+    return "${resultRes.step2_emission.toStringAsFixed(3)} grams";
+  } else if (step == "Resize Image") {
+    return "${resultRes.step3_emission.toStringAsFixed(3)} grams";
+  } else if (step == "Inference") {
+    return "${resultRes.step4_emission.toStringAsFixed(3)} grams";
+  } else {
+    return "";
+  }
 }
 
 String getStep(String step) {

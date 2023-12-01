@@ -15,8 +15,8 @@ class _BottomVisualizerState extends State<BottomVisualizer> {
   Widget build(BuildContext context) {
     return Row(
       children: const [
-        Flexible(flex: 7, fit: FlexFit.tight, child: InferenceVisualizer()),
         Flexible(flex: 7, fit: FlexFit.tight, child: DetailEmissionVisualizer()),
+        Flexible(flex: 7, fit: FlexFit.tight, child: InferenceVisualizer()),
       ],
     );
   }

@@ -13,10 +13,10 @@ class Visualizer extends StatefulWidget {
 class _VisualizerState extends State<Visualizer> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: const [
-        Flexible(flex: 6, fit: FlexFit.tight, child: TopVisualizer()),
-        Flexible(flex: 6, fit: FlexFit.tight, child: BottomVisualizer()),
+        Flexible(flex: 4, fit: FlexFit.tight, child: TopVisualizer()),
+        Flexible(flex: 8, fit: FlexFit.tight, child: BottomVisualizer()),
       ],
     );
   }
