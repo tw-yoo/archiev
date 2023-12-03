@@ -19,7 +19,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 import 'model/result_res.dart';
 
-const String api_path = "http://127.0.0.1:8000";
+const String api_path = "https://yearly-known-finch.ngrok-free.app";
 
 void getModelList(BuildContext context) {
   final url = Uri.parse("$api_path/model_list");
