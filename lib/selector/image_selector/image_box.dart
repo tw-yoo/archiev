@@ -18,7 +18,7 @@ class ImageBoxState extends State<ImageBox> {
     Image? img = context.watch<SelectorOption>().imageData;
 
     if (img == null) {
-      return const Text("Image Not Selected\n You should upload image to create chart.", style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(256, 256, 256, 100), fontSize: 20),);
+      return const Text("Image Not Uploaded\n You should upload an image to create chart.", style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(256, 256, 256, 100), fontSize: 18),);
     } else {
       return Flexible(
           child: FittedBox(
