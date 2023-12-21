@@ -70,8 +70,8 @@ class _EmissionVisualizerState extends State<EmissionVisualizer> {
 
         return SfCartesianChart(
             title: ChartTitle(
-                text: 'Carbon Emission of Selected Model(s)',
-                textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                text: 'Carbon Emission of Selected Model(s)\nDouble Click the Chart to See Details',
+                textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
             ),
             primaryXAxis: CategoryAxis(
                 title: AxisTitle(

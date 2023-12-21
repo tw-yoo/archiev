@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     getModelList(context);
 
     return MaterialApp(
-      title: 'AI ArchiEV',
+      title: 'MIEV',
       theme: ThemeData(primarySwatch: Colors.green),
       // darkTheme: ThemeData.dark(),
       // themeMode: ThemeMode.dark,
@@ -60,7 +60,7 @@ class MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("AI ArchiEV")
+          title: const Text("MIEV")
       ),
       body: Row(
         children: const [

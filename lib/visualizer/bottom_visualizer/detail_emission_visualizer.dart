@@ -103,7 +103,7 @@ class _DetailEmissionVisualizerState extends State<DetailEmissionVisualizer> {
                   yValueMapper: (ChartData data, _) => data.y,
                   color: Colors.green,
                   animationDuration: 500,
-                dataLabelMapper: (ChartData data, _) => "${getStepEmission(data.x, resultRes)} \n ${data.y.toStringAsFixed(3)}",
+                dataLabelMapper: (ChartData data, _) => "${getStepEmission(data.x, resultRes)} \n ${data.y.toStringAsFixed(3)}%",
                 dataLabelSettings: const DataLabelSettings(
                   isVisible: true,
                   labelAlignment: ChartDataLabelAlignment.outer,
